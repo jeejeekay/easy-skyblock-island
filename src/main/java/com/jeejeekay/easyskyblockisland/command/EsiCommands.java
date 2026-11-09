@@ -80,7 +80,7 @@ public final class EsiCommands {
         Vec3i size = new Vec3i(area.getXSpan(), area.getYSpan(), area.getZSpan());
 
         StructureTemplate template = new StructureTemplate();
-        // Air is left out so a placed island never carves into water or terrain around it.
+        // Air (and, when saving, boundary markers) is left out so a placed island never carves into water or terrain around it.
         template.fillFromWorld(player.level(), min, size, false, Blocks.AIR);
         template.setAuthor(player.getName().getString());
         try {

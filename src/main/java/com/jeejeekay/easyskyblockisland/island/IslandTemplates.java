@@ -4,6 +4,8 @@ import com.jeejeekay.easyskyblockisland.EasySkyblockIsland;
 import com.jeejeekay.easyskyblockisland.config.EsiConfig;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
@@ -17,8 +19,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
@@ -170,9 +174,43 @@ public final class IslandTemplates {
         return null;
     }
 
+    /** Blocks that are never saved into an island: every kind of air, structure voids and boundary markers. */
+    public static final Set<String> NOT_SAVED = Set.of(
+            "minecraft:air", "minecraft:cave_air", "minecraft:void_air", "minecraft:structure_void",
+            EasySkyblockIsland.MODID + ":boundary_marker");
+
     public static void save(String name, StructureTemplate template) throws IOException {
         Path file = fileFor(name);
         Files.createDirectories(file.getParent());
-        NbtIo.writeCompressed(template.save(new CompoundTag()), file.toFile());
+        NbtIo.writeCompressed(stripUnsavedBlocks(template.save(new CompoundTag())), file.toFile());
+    }
+
+    /**
+     * Removes {@link #NOT_SAVED} blocks from saved structure NBT. Anything left out keeps whatever
+     * is in the world when the island is placed (water, terrain, air).
+     */
+    public static CompoundTag stripUnsavedBlocks(CompoundTag tag) {
+        ListTag palette = tag.contains("palette", Tag.TAG_LIST)
+                ? tag.getList("palette", Tag.TAG_COMPOUND)
+                : tag.getList("palettes", Tag.TAG_LIST).isEmpty() ? new ListTag() : tag.getList("palettes", Tag.TAG_LIST).getList(0);
+        Set<Integer> skipped = new HashSet<>();
+        for (int i = 0; i < palette.size(); i++) {
+            if (NOT_SAVED.contains(palette.getCompound(i).getString("Name"))) {
+                skipped.add(i);
+            }
+        }
+        if (skipped.isEmpty()) {
+            return tag;
+        }
+        ListTag blocks = tag.getList("blocks", Tag.TAG_COMPOUND);
+        ListTag kept = new ListTag();
+        for (int i = 0; i < blocks.size(); i++) {
+            CompoundTag block = blocks.getCompound(i);
+            if (!skipped.contains(block.getInt("state"))) {
+                kept.add(block);
+            }
+        }
+        tag.put("blocks", kept);
+        return tag;
     }
 }

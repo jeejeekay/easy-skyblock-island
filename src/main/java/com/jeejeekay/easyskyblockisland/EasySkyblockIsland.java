@@ -36,6 +36,7 @@ public class EasySkyblockIsland {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(Registration.ISLAND_WAND);
             event.accept(Registration.SPAWN_MARKER_ITEM);
+            event.accept(Registration.BOUNDARY_MARKER_ITEM);
         }
     }
 }

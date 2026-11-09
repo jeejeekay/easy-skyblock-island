@@ -8,7 +8,7 @@ A small Forge 1.20.1 mod that turns any dimension into a superflat-style void or
 - **Islands you build:**
   1. Build the island.
   2. Place an **Island Spawn Marker** where players should stand, with the arrow facing where they should look.
-  3. Mark two corners with the **Island Wand**.
+  3. Mark two corners with the **Island Wand** (use **Island Boundary Markers** to mark corners in mid-air).
   4. Run `/esi save <name>`.
 
   Chests are saved with their contents, so a chest on the island is the starting kit.
@@ -49,6 +49,13 @@ Only worlds created with this world type are affected. Each world copies the set
 - Sneak and use it in the air to clear both corners.
 
 While you hold the wand, the selection is drawn as an outline.
+
+### Island Boundary Marker
+
+- A block for marking corners out in the void. Use it while not looking at a block and it's placed two blocks in front of you, in mid-air.
+- Click it with the Island Wand like any other block. It is never saved into an island.
+
+Air of any kind (including cave air) and structure voids aren't saved either, so a placed island only replaces blocks where it actually has blocks; water or terrain around and inside it stays.
 
 ### Island Spawn Marker
 

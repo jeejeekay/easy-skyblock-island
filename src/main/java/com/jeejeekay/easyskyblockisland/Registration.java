@@ -2,6 +2,7 @@ package com.jeejeekay.easyskyblockisland;
 
 import com.jeejeekay.easyskyblockisland.block.SpawnMarkerBlock;
 import com.jeejeekay.easyskyblockisland.island.KeepExistingProcessor;
+import com.jeejeekay.easyskyblockisland.item.BoundaryMarkerItem;
 import com.jeejeekay.easyskyblockisland.item.IslandWandItem;
 import com.jeejeekay.easyskyblockisland.world.LayeredVoidChunkGenerator;
 import com.mojang.serialization.Codec;
@@ -37,6 +38,20 @@ public final class Registration {
                     .pushReaction(PushReaction.DESTROY)));
 
     public static final RegistryObject<Item> SPAWN_MARKER_ITEM = ITEMS.register("spawn_marker", () -> new BlockItem(SPAWN_MARKER.get(), new Item.Properties()));
+
+    /** Marks selection corners in the void. Never saved into islands. */
+    public static final RegistryObject<Block> BOUNDARY_MARKER = BLOCKS.register("boundary_marker", () -> new Block(
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .noOcclusion()
+                    .instabreak()
+                    .sound(SoundType.GLASS)
+                    .isValidSpawn((state, level, pos, type) -> false)
+                    .isRedstoneConductor((state, level, pos) -> false)
+                    .isSuffocating((state, level, pos) -> false)
+                    .isViewBlocking((state, level, pos) -> false)));
+
+    public static final RegistryObject<Item> BOUNDARY_MARKER_ITEM = ITEMS.register("boundary_marker", () -> new BoundaryMarkerItem(BOUNDARY_MARKER.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ISLAND_WAND = ITEMS.register("island_wand", () -> new IslandWandItem(new Item.Properties().stacksTo(1)));
 
