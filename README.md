@@ -17,11 +17,14 @@ A small Forge 1.20.1 mod that turns any dimension into a superflat-style void or
 
 ## Building
 
-```
-./gradlew build
+Gradle has to run on a **JDK 17** (Gradle 8.8 can't run on Java 23 or newer). On Windows PowerShell, point `JAVA_HOME` at a JDK 17 for the session and use `.\gradlew` (plain `gradlew` runs whatever is on your PATH, not this project's wrapper):
+
+```powershell
+$env:JAVA_HOME = "C:\Program Files\Eclipse Adoptium\jdk-17.0.x-hotspot"   # your JDK 17 folder
+.\gradlew build
 ```
 
-The jar ends up in `build/libs/`. You need Java 17. The mod uses a mixin and access transformers, and both are set up in `build.gradle`.
+On Linux/macOS: `./gradlew build`. The jar ends up in `build/libs/`. The mod uses a mixin and access transformers, and both are set up in `build.gradle`.
 
 ## Using it
 
