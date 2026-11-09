@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "easy_skyblock_island:item/island_wand"
+  }
+}

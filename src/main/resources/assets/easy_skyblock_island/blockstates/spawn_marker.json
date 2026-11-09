@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "easy_skyblock_island:block/spawn_marker" },
+    "facing=east":  { "model": "easy_skyblock_island:block/spawn_marker", "y": 90 },
+    "facing=south": { "model": "easy_skyblock_island:block/spawn_marker", "y": 180 },
+    "facing=west":  { "model": "easy_skyblock_island:block/spawn_marker", "y": 270 }
+  }
+}
