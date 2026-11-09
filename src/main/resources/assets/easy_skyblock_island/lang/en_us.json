@@ -29,5 +29,7 @@
   "easy_skyblock_island.picker.hint": "Build an island, mark it with the Island Wand and run /esi save <name> to add it here",
   "block.easy_skyblock_island.boundary_marker": "Island Boundary Marker",
   "block.easy_skyblock_island.boundary_marker.tooltip.1": "Mark selection corners with it. Never saved into islands.",
-  "block.easy_skyblock_island.boundary_marker.tooltip.2": "Use while not looking at a block to place it in mid-air."
+  "block.easy_skyblock_island.boundary_marker.tooltip.2": "Use while not looking at a block to place it in mid-air.",
+  "easy_skyblock_island.picker.size": "%s × %s × %s, %s blocks · drag to turn",
+  "easy_skyblock_island.picker.missing": "Island '%s' not found"
 }

@@ -144,8 +144,9 @@ public final class IslandTemplates {
         return template;
     }
 
+    /** The raw structure NBT of an island (world folder, then config folder, then the mod jar). */
     @Nullable
-    private static CompoundTag readTag(@Nullable MinecraftServer server, String name) {
+    public static CompoundTag readTag(@Nullable MinecraftServer server, String name) {
         if (!isValidName(name)) {
             EasySkyblockIsland.LOGGER.warn("'{}' isn't a valid island name", name);
             return null;

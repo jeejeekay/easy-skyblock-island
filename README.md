@@ -13,7 +13,7 @@ A small Forge 1.20.1 mod that turns any dimension into a superflat-style void or
 
   Chests are saved with their contents, so a chest on the island is the starting kit.
 - **Placement:** an island goes either at spawn when the world is created, or at the spot where the first player arrives in that dimension (Nether portal, End platform, a rocket landing, and so on).
-- **World type:** "Skyblock Islands" is added to the Create World screen and selected by default (this can be turned off). Its **Customize** button lets you pick which saved island each dimension gets.
+- **World type:** "Skyblock Islands" is added to the Create World screen and selected by default (this can be turned off). Its **Customize** button lets you pick which saved island each dimension gets, with a spinning 3D preview of each island (drag to turn it; chests and other block entities included).
 
 ## Building
 
